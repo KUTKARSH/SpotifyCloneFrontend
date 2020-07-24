@@ -9,8 +9,13 @@ import { DataService } from '../data.service';
 export class SongComponent implements OnInit {
 
   data : Array<any>;
-  name : String;
+  
+  
+  audio : any;
+
   constructor(private svc : DataService) {
+    this.audio = new Audio();
+    
       svc.fetchSongsData()
       .subscribe(
           d => {
@@ -20,6 +25,17 @@ export class SongComponent implements OnInit {
           }
       );
       
+   }
+   name : String;
+   status :Boolean;
+   play(name : String){
+    this.status = true;
+    this.svc.play(name);
+   }
+
+   pause(){
+      this.status = false;
+      this.svc.pause();
    }
 
   ngOnInit(): void {

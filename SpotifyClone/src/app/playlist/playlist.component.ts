@@ -47,6 +47,18 @@ export class PlaylistComponent implements OnInit {
     
    }
 
+   name : String;
+   status :Boolean;
+   play(name : String){
+    this.status = true;
+    this.svc.play(name);
+   }
+
+   pause(){
+      this.status = false;
+      this.svc.pause();
+   }
+
   ngOnInit(): void {
   }
 

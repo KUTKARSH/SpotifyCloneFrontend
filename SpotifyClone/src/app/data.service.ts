@@ -6,9 +6,33 @@ import {HttpClient} from '@angular/common/http';
 })
 export class DataService {
 
-  constructor(private httpClient : HttpClient){
+  audio : any;
+  songMap : any;
 
+  constructor(private httpClient : HttpClient){
+      this.audio = new Audio();
+      this.songMap = new Map();
+      this.songMap.set("MYSTIFY","dekhte.mp3");
+      this.songMap.set("GODSPEED","gungroo.mp3");
+      this.songMap.set("VENOM","ipl.mp3");
+      this.songMap.set("MISTAKEN","jai.mp3");
+      this.songMap.set("POWER","shiv.mp3");
+      this.songMap.set("PUNCH","urvashi.mp3");
+      this.songMap.set("AIRPORT","tu meri.mp3");
+      this.songMap.set("VENICE","mai tera.mp3");
+      this.songMap.set("CITYLIGHT","raabta.mp3");
   }
+
+  play(name : String){
+    name = this.songMap.get(name);
+    this.audio.src = "../../../assets/audio/" + name;
+    this.audio.load();
+    this.audio.play();
+   }
+
+   pause(){
+    this.audio.pause();
+ }
 
   fetchSongsData() : any{
       return this.httpClient.get( "http://localhost:8080/song/");
@@ -23,10 +47,12 @@ export class DataService {
   }
 
   fetchFollowedArtistData(id : String) : any{
+    console.log("follow data api called for" + id);
     return this.httpClient.get( "http://localhost:8080/artist/userFollowed/" + id);
   }
 
   fetchUnfollowedArtistData(id : String) : any{
+    console.log("unfollow data api called for" + id);
     return this.httpClient.get( "http://localhost:8080/artist/userUnfollowed/" + id);
   }
 
@@ -47,10 +73,12 @@ export class DataService {
   } 
 
   follow(artistId : String,userId : String){
+    console.log("follow api called");
     return this.httpClient.get("http://localhost:8080/artist/follow/" + artistId + "/" + userId);
   }
   
   unfollow(artistId : String,userId : String){
+    console.log("unfollow api called");
     return this.httpClient.get("http://localhost:8080/artist/unfollow/" + artistId + "/" + userId);
   }
 

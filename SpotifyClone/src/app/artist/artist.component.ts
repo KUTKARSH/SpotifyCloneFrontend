@@ -21,7 +21,7 @@ export class ArtistComponent implements OnInit {
     this.svc.fetchSongDataOfArtist(id)
     .subscribe(
         d => {
-          console.log(d);
+          // console.log(d);
           this.songs = d;
         }
     );
@@ -35,7 +35,6 @@ export class ArtistComponent implements OnInit {
       console.log("User not logged in");
       window.alert("User not logged in");
     }
-    
     else
     {
       svc.fetchFollowedArtistData(userId)
@@ -60,7 +59,14 @@ export class ArtistComponent implements OnInit {
   }
 
   subscribeClick(id : String) {
-    this.svc.follow(id,sessionStorage.getItem("userId"));
+    this.svc.follow(id,sessionStorage.getItem("userId"))
+    .subscribe(
+      d => {
+        // console.log("Follow api response");
+        // console.log(d);
+        
+      }
+  );
     this.svc.fetchFollowedArtistData(sessionStorage.getItem("userId"))
     .subscribe(
         d => {
@@ -81,7 +87,13 @@ export class ArtistComponent implements OnInit {
   }
 
   unsubscribeClick(id : String){
-    this.svc.unfollow(id,sessionStorage.getItem("userId"));
+    this.svc.unfollow(id,sessionStorage.getItem("userId"))
+    .subscribe(
+      d => {
+        // console.log("Unollow api response");
+        // console.log(d);
+        
+      });
     this.svc.fetchFollowedArtistData(sessionStorage.getItem("userId"))
     .subscribe(
         d => {
@@ -100,6 +112,23 @@ export class ArtistComponent implements OnInit {
         }
     );
   }
+
+  name : String;
+   status :Boolean;
+   play(name : String){
+    this.status = true;
+    this.svc.play(name);
+   }
+
+   pause(){
+      this.status = false;
+      this.svc.pause();
+   }
+
+   back(){
+     this.artistMenu = false;
+     console.log("Back clicked");
+   }
 
   ngOnInit(): void {
   }

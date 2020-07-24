@@ -12,5 +12,7 @@
 
 
 <ul *ngIf = "artistMenu" class="list-group">
-    <li *ngFor = "let song of songs" class="list-group-item">{{song.name}}</li>
+    <li (click) = "play(song.name)" *ngFor = "let song of songs" class="list-group-item">{{song.name}}</li>
+    <button *ngIf = "status" (click) = "pause()" class="button button3">Pause</button>
 </ul>
+<button *ngIf = "artistMenu" (click) = "back()" class="button button3">Back</button>
