@@ -24,6 +24,46 @@ export class PlaylistComponent implements OnInit {
     );
   }
 
+  create(){
+    let name = (<HTMLInputElement>document.getElementById("name")).value;
+    let songs = (<HTMLInputElement>document.getElementById("songs")).value;
+    console.log(name);
+    console.log(songs);
+    this.svc.createPlaylist(name,songs).
+    subscribe(
+        d => {
+          console.log(d);
+        }
+    );
+    this.svc.fetchPlaylistData(sessionStorage.getItem("userId"))
+    .subscribe(
+        d => {
+          console.log(d);
+          console.log(d[0].name);
+          this.data = d;
+        }
+    );
+
+  }
+
+  remove(){
+    let name = (<HTMLInputElement>document.getElementById("name")).value;
+    console.log(name);
+    this.svc.deletePlaylist(name).
+    subscribe(
+        d => {
+          console.log(d);
+        }
+    );
+    this.svc.fetchPlaylistData(sessionStorage.getItem("userId"))
+    .subscribe(
+        d => {
+          console.log(d);
+          console.log(d[0].name);
+          this.data = d;
+        });
+  }
+
   constructor(private svc : DataService) {
     this.playlistMenu = false;
     let userId : String = sessionStorage.getItem("userId");

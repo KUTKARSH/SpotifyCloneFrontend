@@ -90,4 +90,12 @@ export class DataService {
     return this.httpClient.get("http://localhost:8080/user/login/" + email + "/" + password);
   }
 
+  createPlaylist(name : String,songs :String){
+    return this.httpClient.get("http://localhost:8080/playlist/userCreate/" + name + "/" + songs + "/" + sessionStorage.getItem("userId"));
+  }
+
+  deletePlaylist(name : String){
+    return this.httpClient.get("http://localhost:8080/playlist/deletePlaylist/" + name);
+  }
+
 }

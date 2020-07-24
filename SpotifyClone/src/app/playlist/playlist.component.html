@@ -7,3 +7,24 @@
     <li (click) = "play(song.name)" *ngFor = "let song of songs" class="list-group-item">{{song.name}}</li>
     <button *ngIf = "status" (click) = "pause()" class="button button3">Pause</button>
 </ul>
+<br><br><br><br><br><br><br><br>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Login Form -->
+    <form>
+      <input type="text" id="name" class="fadeIn second" name="login" placeholder="Playlist name to create or remove">
+      <input type="text" id="songs" class="fadeIn second" name="login" placeholder="Song names comma seperated(case sensitive)">
+      <input (click) = "create()" type="button" class="fadeIn fourth" value="Create">
+      <input (click) = "remove()" type="button" class="fadeIn fourth" value="Remove">
+    </form>
+  </div>
+</div>
+
