@@ -1,7 +1,8 @@
-<ul class="list-group">
-    <li *ngFor = "let album of data" class="list-group-item">{{album.name}} ({{album.year}})</li>
-    <!-- <li class="list-group-item">Item 1</li>
-    <li class="list-group-item">Item 2</li>
-    <li class="list-group-item">Item 3</li>
-    <li class="list-group-item">Item 4</li> -->
+<ul *ngIf = "!albumMenu" class="list-group">
+    <li (click) = "loadSongsData(album.id)" *ngFor = "let album of data" class="list-group-item">{{album.name}} ({{album.year}})</li>
 </ul>
+
+<ul *ngIf = "albumMenu" class="list-group">
+    <li *ngFor = "let song of songs" class="list-group-item">{{song.name}}</li>
+</ul>
+

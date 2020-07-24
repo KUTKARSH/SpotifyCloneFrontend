@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 
-
 @Component({
   selector: 'app-playlist',
   templateUrl: './playlist.component.html',
@@ -10,8 +9,33 @@ import { DataService } from '../data.service';
 export class PlaylistComponent implements OnInit {
 
   data : Array<any>;
+  songs : Array<String>;
+
+  playlistMenu : Boolean;
+
+  loadSongsData(id : String){
+    this.playlistMenu = true;
+    this.svc.fetchSongDataOfPlaylist(id)
+    .subscribe(
+        d => {
+          console.log(d);
+          this.songs = d;
+        }
+    );
+  }
+
   constructor(private svc : DataService) {
-      svc.fetchPlaylistData()
+    this.playlistMenu = false;
+    let userId : String = sessionStorage.getItem("userId");
+    if(userId == "-1")
+    {
+      console.log("User not logged in");
+      window.alert("User not logged in");
+    }
+    
+    else
+    {
+      svc.fetchPlaylistData(userId)
       .subscribe(
           d => {
             console.log(d);
@@ -19,7 +43,8 @@ export class PlaylistComponent implements OnInit {
             this.data = d;
           }
       );
-      
+    }  
+    
    }
 
   ngOnInit(): void {

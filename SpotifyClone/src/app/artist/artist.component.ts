@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
+
 
 @Component({
   selector: 'app-artist',
@@ -7,7 +9,97 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArtistComponent implements OnInit {
 
-  constructor() { }
+  followedArtists : Array<any>;
+  unfollowedArtists : Array<any>;
+  songs : Array<any>;
+  artistMenu : Boolean;
+  songId : String;
+
+  loadSongsData(id : String){
+    this.songId = id;
+    this.artistMenu = true;
+    this.svc.fetchSongDataOfArtist(id)
+    .subscribe(
+        d => {
+          console.log(d);
+          this.songs = d;
+        }
+    );
+  }
+
+  constructor(private svc : DataService) { 
+    this.artistMenu = false;
+    let userId : String = sessionStorage.getItem("userId");
+    if(userId == "-1")
+    {
+      console.log("User not logged in");
+      window.alert("User not logged in");
+    }
+    
+    else
+    {
+      svc.fetchFollowedArtistData(userId)
+      .subscribe(
+          d => {
+            console.log(d);
+            console.log(d[0].name);
+            this.followedArtists = d;
+          }
+      );
+
+      svc.fetchUnfollowedArtistData(userId)
+      .subscribe(
+          d => {
+            console.log(d);
+            console.log(d[0].name);
+            this.unfollowedArtists = d;
+          }
+      );
+    }
+    
+  }
+
+  subscribeClick(id : String) {
+    this.svc.follow(id,sessionStorage.getItem("userId"));
+    this.svc.fetchFollowedArtistData(sessionStorage.getItem("userId"))
+    .subscribe(
+        d => {
+          console.log(d);
+          console.log(d[0].name);
+          this.followedArtists = d;
+        }
+    );
+
+    this.svc.fetchUnfollowedArtistData(sessionStorage.getItem("userId"))
+    .subscribe(
+        d => {
+          console.log(d);
+          console.log(d[0].name);
+          this.unfollowedArtists = d;
+        }
+    );
+  }
+
+  unsubscribeClick(id : String){
+    this.svc.unfollow(id,sessionStorage.getItem("userId"));
+    this.svc.fetchFollowedArtistData(sessionStorage.getItem("userId"))
+    .subscribe(
+        d => {
+          console.log(d);
+          console.log(d[0].name);
+          this.followedArtists = d;
+        }
+    );
+
+    this.svc.fetchUnfollowedArtistData(sessionStorage.getItem("userId"))
+    .subscribe(
+        d => {
+          console.log(d);
+          console.log(d[0].name);
+          this.unfollowedArtists = d;
+        }
+    );
+  }
 
   ngOnInit(): void {
   }

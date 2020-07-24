@@ -5,6 +5,9 @@ import {AlbumComponent} from  './album/album.component';
 import {ArtistComponent} from './artist/artist.component';
 import {PlaylistComponent} from './playlist/playlist.component';
 import {UserComponent} from './user/user.component';
+import {LoginComponent} from './login/login.component';
+import {LogoutComponent} from './logout/logout.component';
+import {RegisterComponent} from './register/register.component'; 
 
 const routes: Routes = [
   { path: 'song', component: SongComponent },
@@ -12,6 +15,9 @@ const routes: Routes = [
   { path: 'artist', component: ArtistComponent },
   { path: 'playlist', component: PlaylistComponent },
   { path: 'user', component: UserComponent },
+  {path : 'login' , component : LoginComponent},
+  {path : 'logout' , component : LogoutComponent},
+  {path : 'register' , component : RegisterComponent}
 ];
 
 @NgModule({

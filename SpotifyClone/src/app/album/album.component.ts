@@ -10,8 +10,23 @@ import { DataService } from '../data.service';
 export class AlbumComponent implements OnInit {
 
   data : Array<any>;
+  songs : Array<any>;
+  albumMenu : Boolean;
+
+  loadSongsData(id : String){
+    this.albumMenu = true;
+    this.svc.fetchSongDataOfAlbum(id)
+    .subscribe(
+        d => {
+          console.log(d);
+          this.songs = d;
+        }
+    );
+  }
+
   constructor(private svc : DataService) {
-      svc.fetchAlbumData()
+    this.albumMenu = false;  
+    svc.fetchAlbumData()
       .subscribe(
           d => {
             console.log(d);
