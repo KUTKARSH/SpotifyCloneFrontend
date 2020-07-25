@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import {LoginClass} from './login';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +18,10 @@ export class LoginComponent implements OnInit {
     console.log(password);
     this.svc.login(email,password)
     .subscribe(
-        d => {
+        (d : LoginClass) => {
+          var name = d.name;
           console.log(d.userId);
+          console.log(d.name);
           if(d.status == "Valid")
           {
             console.log("Valid user logged in");
@@ -28,7 +31,8 @@ export class LoginComponent implements OnInit {
           {
             console.log("Invalid user login");
           }
-          sessionStorage.setItem("userId",d.userId);
+          var userId = d.userId;
+          sessionStorage.setItem("userId",String(userId));
         }
     );
   }

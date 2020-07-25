@@ -98,4 +98,8 @@ export class DataService {
     return this.httpClient.get("http://localhost:8080/playlist/deletePlaylist/" + name);
   }
 
+  searchSong(name : String){
+    return this.httpClient.get("http://localhost:8080/song/search/" + name);
+  }
+
 }

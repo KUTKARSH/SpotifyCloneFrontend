@@ -8,6 +8,7 @@ import {UserComponent} from './user/user.component';
 import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
 import {RegisterComponent} from './register/register.component'; 
+import {SearchComponent} from './search/search.component';
 
 const routes: Routes = [
   { path: 'song', component: SongComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'user', component: UserComponent },
   {path : 'login' , component : LoginComponent},
   {path : 'logout' , component : LogoutComponent},
-  {path : 'register' , component : RegisterComponent}
+  {path : 'register' , component : RegisterComponent},
+  {path : 'search' , component : SearchComponent}
 ];
 
 @NgModule({
