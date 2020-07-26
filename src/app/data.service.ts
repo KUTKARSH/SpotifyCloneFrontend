@@ -9,7 +9,7 @@ export class DataService {
   audio : any;
   songMap : any;
   // url : String = "http://localhost:8080";
-  url :String = "https://spotifybackendchubb.azurewebsites.net";
+  url :String = "https://spotify-clone-chubb.herokuapp.com/";
 
   constructor(private httpClient : HttpClient){
       this.audio = new Audio();
