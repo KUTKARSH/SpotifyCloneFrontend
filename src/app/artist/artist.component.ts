@@ -16,6 +16,7 @@ export class ArtistComponent implements OnInit {
   songId : String;
 
   loadSongsData(id : String){
+    console.log("load songs data called");
     this.songId = id;
     this.artistMenu = true;
     this.svc.fetchSongDataOfArtist(id)
@@ -41,7 +42,7 @@ export class ArtistComponent implements OnInit {
       .subscribe(
           d => {
             console.log(d);
-            console.log(d[0].name);
+            // console.log(d[0].name);
             this.followedArtists = d;
           }
       );
@@ -50,7 +51,7 @@ export class ArtistComponent implements OnInit {
       .subscribe(
           d => {
             console.log(d);
-            console.log(d[0].name);
+            // console.log(d[0].name);
             this.unfollowedArtists = d;
           }
       );
@@ -59,6 +60,8 @@ export class ArtistComponent implements OnInit {
   }
 
   subscribeClick(id : String) {
+    this.loadSongsData(id);
+    console.log("subscribe function called");
     this.svc.follow(id,sessionStorage.getItem("userId"))
     .subscribe(
       d => {
@@ -67,26 +70,12 @@ export class ArtistComponent implements OnInit {
         
       }
   );
-    this.svc.fetchFollowedArtistData(sessionStorage.getItem("userId"))
-    .subscribe(
-        d => {
-          console.log(d);
-          console.log(d[0].name);
-          this.followedArtists = d;
-        }
-    );
-
-    this.svc.fetchUnfollowedArtistData(sessionStorage.getItem("userId"))
-    .subscribe(
-        d => {
-          console.log(d);
-          console.log(d[0].name);
-          this.unfollowedArtists = d;
-        }
-    );
+    
   }
 
   unsubscribeClick(id : String){
+    this.loadSongsData(id);
+    console.log("unsubscribe function called");
     this.svc.unfollow(id,sessionStorage.getItem("userId"))
     .subscribe(
       d => {
@@ -94,23 +83,7 @@ export class ArtistComponent implements OnInit {
         // console.log(d);
         
       });
-    this.svc.fetchFollowedArtistData(sessionStorage.getItem("userId"))
-    .subscribe(
-        d => {
-          console.log(d);
-          console.log(d[0].name);
-          this.followedArtists = d;
-        }
-    );
-
-    this.svc.fetchUnfollowedArtistData(sessionStorage.getItem("userId"))
-    .subscribe(
-        d => {
-          console.log(d);
-          console.log(d[0].name);
-          this.unfollowedArtists = d;
-        }
-    );
+    
   }
 
   name : String;
@@ -128,6 +101,25 @@ export class ArtistComponent implements OnInit {
    back(){
      this.artistMenu = false;
      console.log("Back clicked");
+     this.followedArtists = [];
+     this.unfollowedArtists = [];
+     this.svc.fetchFollowedArtistData(sessionStorage.getItem("userId"))
+    .subscribe(
+        d => {
+          console.log(d);
+          console.log(d[0].name);
+          this.followedArtists = d;
+        }
+    );
+
+    this.svc.fetchUnfollowedArtistData(sessionStorage.getItem("userId"))
+    .subscribe(
+        d => {
+          console.log(d);
+          console.log(d[0].name);
+          this.unfollowedArtists = d;
+        }
+    );
    }
 
   ngOnInit(): void {

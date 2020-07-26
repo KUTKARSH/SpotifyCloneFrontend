@@ -70,7 +70,7 @@ export class PlaylistComponent implements OnInit {
     if(userId == "-1")
     {
       console.log("User not logged in");
-      window.alert("User not logged in");
+      window.alert("User not logged in. Go to login tab first.");
     }
     
     else

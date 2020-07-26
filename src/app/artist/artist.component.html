@@ -1,14 +1,19 @@
 <ul *ngIf = "!artistMenu" class="list-group">
-    <li (click) = "loadSongsData(artist.id)" *ngFor = "let artist of unfollowedArtists" class="list-group-item">{{artist.name}} 
+    <li *ngFor = "let artist of unfollowedArtists" class="list-group-item">{{artist.name}} 
         <button (click) = "subscribeClick(artist.id)" class="button button1">Follow</button>
+        <button (click) = "loadSongsData(artist.id)" class="button button1">View</button>
     </li>
+    <li (click) = "loadSongsData(artist.id)" *ngFor = "let artist of followedArtists" class="list-group-item">{{artist.name}} 
+        <button (click) = "unsubscribeClick(artist.id)" class="button button3">Unfollow</button>
+        <button (click) = "loadSongsData(artist.id)" class="button button1">View</button>
+    </li>   
 </ul>
 <br><br>
-<ul *ngIf = "!artistMenu" class="list-group">
+<!-- <ul *ngIf = "!artistMenu" class="list-group">
     <li (click) = "loadSongsData(artist.id)" *ngFor = "let artist of followedArtists" class="list-group-item">{{artist.name}} 
         <button (click) = "unsubscribeClick(artist.id)" class="button button3">Unfollow</button>
     </li>
-</ul>
+</ul> -->
 
 
 <ul *ngIf = "artistMenu" class="list-group">

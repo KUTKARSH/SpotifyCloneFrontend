@@ -9,7 +9,11 @@ import {LoginClass} from './login';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private svc : DataService) { }
+  loginStatus : Boolean;
+
+  constructor(private svc : DataService) { 
+    this.loginStatus = true;
+  }
 
   login(){
     let email = (<HTMLInputElement>document.getElementById("email")).value;
@@ -25,14 +29,18 @@ export class LoginComponent implements OnInit {
           if(d.status == "Valid")
           {
             console.log("Valid user logged in");
-            
+            var userId = d.userId;
+            sessionStorage.setItem("userId",String(userId));
+            alert("Login successfull");
+            this.loginStatus = false;
           }
           else
           {
             console.log("Invalid user login");
+            var userId = d.userId;
+            sessionStorage.setItem("userId",String(userId));
+            alert("Login unsuccessfull");
           }
-          var userId = d.userId;
-          sessionStorage.setItem("userId",String(userId));
         }
     );
   }

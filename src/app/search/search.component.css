@@ -4,13 +4,17 @@
     top : 50px;
 }
 
-    body,html{
+li{
+    cursor: pointer;
+}
+
+    /* body,html{
         height: 100%;
         width: 100%;
         margin: 0;
         padding: 0;
         background: #e74c3c !important;
-        }
+        } */
     
         .searchbar{
         margin-bottom: auto;
@@ -25,7 +29,7 @@
         color: white;
         border: 0;
         outline: 0;
-        background: none;
+        /* background: none; */
         width: 0;
         caret-color:transparent;
         line-height: 40px;
@@ -52,6 +56,6 @@
         justify-content: center;
         align-items: center;
         border-radius: 50%;
-        color:white;
+        /* color:white; */
         text-decoration:none;
         }
