@@ -8,6 +8,8 @@ export class DataService {
 
   audio : any;
   songMap : any;
+  // url : String = "http://localhost:8080";
+  url :String = "https://spotifybackendchubb.azurewebsites.net";
 
   constructor(private httpClient : HttpClient){
       this.audio = new Audio();
@@ -35,71 +37,71 @@ export class DataService {
  }
 
   fetchSongsData() : any{
-      return this.httpClient.get( "http://localhost:8080/song/");
+      return this.httpClient.get( this.url + "/song/");
   }
 
   fetchPlaylistData(userId : String) : any{
-    return this.httpClient.get( "http://localhost:8080/playlist/byUser/" + userId);
+    return this.httpClient.get( this.url + "/playlist/byUser/" + userId);
   }
 
   fetchAlbumData() : any{
-    return this.httpClient.get( "http://localhost:8080/album/");
+    return this.httpClient.get( this.url + "/album/");
   }
 
   fetchFollowedArtistData(id : String) : any{
     console.log("follow data api called for" + id);
-    return this.httpClient.get( "http://localhost:8080/artist/userFollowed/" + id);
+    return this.httpClient.get( this.url + "/artist/userFollowed/" + id);
   }
 
   fetchUnfollowedArtistData(id : String) : any{
     console.log("unfollow data api called for" + id);
-    return this.httpClient.get( "http://localhost:8080/artist/userUnfollowed/" + id);
+    return this.httpClient.get( this.url + "/artist/userUnfollowed/" + id);
   }
 
   fetchUserData() : any{
-    return this.httpClient.get( "http://localhost:8080/user/");
+    return this.httpClient.get( this.url + "/user/");
   }
 
   fetchSongDataOfPlaylist(url : String) : any{
-    return this.httpClient.get("http://localhost:8080/playlist/songs/" + url);
+    return this.httpClient.get(this.url + "/playlist/songs/" + url);
   } 
 
   fetchSongDataOfAlbum(url : String) : any{
-    return this.httpClient.get("http://localhost:8080/album/songs/" + url);
+    return this.httpClient.get(this.url + "/album/songs/" + url);
   } 
 
   fetchSongDataOfArtist(url : String) : any{
-    return this.httpClient.get("http://localhost:8080/artist/songs/" + url);
+    return this.httpClient.get(this.url + "/artist/songs/" + url);
   } 
 
   follow(artistId : String,userId : String){
     console.log("follow api called");
-    return this.httpClient.get("http://localhost:8080/artist/follow/" + artistId + "/" + userId);
+    return this.httpClient.get(this.url + "/artist/follow/" + artistId + "/" + userId);
   }
   
   unfollow(artistId : String,userId : String){
     console.log("unfollow api called");
-    return this.httpClient.get("http://localhost:8080/artist/unfollow/" + artistId + "/" + userId);
+    return this.httpClient.get(this.url + "/artist/unfollow/" + artistId + "/" + userId);
   }
 
   register(user : any){
-    return this.httpClient.post("http://localhost:8080/user/",user);
+    return this.httpClient.post(this.url + "/user/",user);
   }
 
   login(email : String,password : String){
-    return this.httpClient.get("http://localhost:8080/user/login/" + email + "/" + password);
+    return this.httpClient.get(this.url + "/user/login/" + email + "/" + password);
   }
 
   createPlaylist(name : String,songs :String){
-    return this.httpClient.get("http://localhost:8080/playlist/userCreate/" + name + "/" + songs + "/" + sessionStorage.getItem("userId"));
+    return this.httpClient.get(this.url + "/playlist/userCreate/" + name + "/" + songs + "/" + sessionStorage.getItem("userId"));
   }
 
   deletePlaylist(name : String){
-    return this.httpClient.get("http://localhost:8080/playlist/deletePlaylist/" + name);
+    return this.httpClient.get(this.url + "/playlist/deletePlaylist/" + name);
   }
 
   searchSong(name : String){
-    return this.httpClient.get("http://localhost:8080/song/search/" + name);
+    return this.httpClient.get(this.url + "/song/search/" + name);
   }
 
 }
